@@ -13,6 +13,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        NSLog("hi")
+        let frame = UIScreen.main.bounds
+        let glView = OpenGLView(frame: frame)
+        
+        self.view.addSubview(glView)
     }
 
     override func didReceiveMemoryWarning() {

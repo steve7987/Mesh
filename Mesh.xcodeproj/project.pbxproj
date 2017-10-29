@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA6325891FA55C8E005EA9EC /* VS.glsl in Resources */ = {isa = PBXBuildFile; fileRef = DA6325881FA55C8E005EA9EC /* VS.glsl */; };
+		DA63258B1FA55CC5005EA9EC /* FS.glsl in Resources */ = {isa = PBXBuildFile; fileRef = DA63258A1FA55CC5005EA9EC /* FS.glsl */; };
 		DA7EC7E61FA4112F00B0CA2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC7E51FA4112F00B0CA2E /* AppDelegate.swift */; };
 		DA7EC7E81FA4112F00B0CA2E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC7E71FA4112F00B0CA2E /* ViewController.swift */; };
 		DA7EC7EB1FA4112F00B0CA2E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7EC7E91FA4112F00B0CA2E /* Main.storyboard */; };
@@ -14,6 +16,7 @@
 		DA7EC7F01FA4112F00B0CA2E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA7EC7EE1FA4112F00B0CA2E /* LaunchScreen.storyboard */; };
 		DA7EC7FB1FA4112F00B0CA2E /* MeshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC7FA1FA4112F00B0CA2E /* MeshTests.swift */; };
 		DA7EC8061FA4112F00B0CA2E /* MeshUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC8051FA4112F00B0CA2E /* MeshUITests.swift */; };
+		DA7EC8141FA411E800B0CA2E /* OpenGLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA6325881FA55C8E005EA9EC /* VS.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = VS.glsl; sourceTree = "<group>"; };
+		DA63258A1FA55CC5005EA9EC /* FS.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = FS.glsl; sourceTree = "<group>"; };
 		DA7EC7E21FA4112F00B0CA2E /* Mesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7EC7E51FA4112F00B0CA2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA7EC7E71FA4112F00B0CA2E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +52,7 @@
 		DA7EC8011FA4112F00B0CA2E /* MeshUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MeshUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA7EC8051FA4112F00B0CA2E /* MeshUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshUITests.swift; sourceTree = "<group>"; };
 		DA7EC8071FA4112F00B0CA2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +80,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DA63258C1FA55CE5005EA9EC /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				DA6325881FA55C8E005EA9EC /* VS.glsl */,
+				DA63258A1FA55CC5005EA9EC /* FS.glsl */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
 		DA7EC7D91FA4112F00B0CA2E = {
 			isa = PBXGroup;
 			children = (
@@ -99,10 +114,12 @@
 			children = (
 				DA7EC7E51FA4112F00B0CA2E /* AppDelegate.swift */,
 				DA7EC7E71FA4112F00B0CA2E /* ViewController.swift */,
+				DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */,
 				DA7EC7E91FA4112F00B0CA2E /* Main.storyboard */,
 				DA7EC7EC1FA4112F00B0CA2E /* Assets.xcassets */,
 				DA7EC7EE1FA4112F00B0CA2E /* LaunchScreen.storyboard */,
 				DA7EC7F11FA4112F00B0CA2E /* Info.plist */,
+				DA63258C1FA55CE5005EA9EC /* Shaders */,
 			);
 			path = Mesh;
 			sourceTree = "<group>";
@@ -232,9 +249,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA6325891FA55C8E005EA9EC /* VS.glsl in Resources */,
 				DA7EC7F01FA4112F00B0CA2E /* LaunchScreen.storyboard in Resources */,
 				DA7EC7ED1FA4112F00B0CA2E /* Assets.xcassets in Resources */,
 				DA7EC7EB1FA4112F00B0CA2E /* Main.storyboard in Resources */,
+				DA63258B1FA55CC5005EA9EC /* FS.glsl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA7EC7E81FA4112F00B0CA2E /* ViewController.swift in Sources */,
+				DA7EC8141FA411E800B0CA2E /* OpenGLView.swift in Sources */,
 				DA7EC7E61FA4112F00B0CA2E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
