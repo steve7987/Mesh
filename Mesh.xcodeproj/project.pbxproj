@@ -17,6 +17,7 @@
 		DA7EC7FB1FA4112F00B0CA2E /* MeshTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC7FA1FA4112F00B0CA2E /* MeshTests.swift */; };
 		DA7EC8061FA4112F00B0CA2E /* MeshUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC8051FA4112F00B0CA2E /* MeshUITests.swift */; };
 		DA7EC8141FA411E800B0CA2E /* OpenGLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */; };
+		DA90647F1FA65D350078D330 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90647E1FA65D350078D330 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		DA7EC8051FA4112F00B0CA2E /* MeshUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeshUITests.swift; sourceTree = "<group>"; };
 		DA7EC8071FA4112F00B0CA2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLView.swift; sourceTree = "<group>"; };
+		DA90647E1FA65D350078D330 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				DA7EC7E51FA4112F00B0CA2E /* AppDelegate.swift */,
 				DA7EC7E71FA4112F00B0CA2E /* ViewController.swift */,
 				DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */,
+				DA90647E1FA65D350078D330 /* Model.swift */,
 				DA7EC7E91FA4112F00B0CA2E /* Main.storyboard */,
 				DA7EC7EC1FA4112F00B0CA2E /* Assets.xcassets */,
 				DA7EC7EE1FA4112F00B0CA2E /* LaunchScreen.storyboard */,
@@ -281,6 +284,7 @@
 				DA7EC7E81FA4112F00B0CA2E /* ViewController.swift in Sources */,
 				DA7EC8141FA411E800B0CA2E /* OpenGLView.swift in Sources */,
 				DA7EC7E61FA4112F00B0CA2E /* AppDelegate.swift in Sources */,
+				DA90647F1FA65D350078D330 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

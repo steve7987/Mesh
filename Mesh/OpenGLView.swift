@@ -24,44 +24,12 @@ class OpenGLView: UIView {
     var depthRenderBuffer = GLuint()
     var colorRenderBuffer = GLuint()
     
+    var projectionMatrix = GLKMatrix4()  //projection matrix for going from world to screen
+    
     var colorSlot = GLuint()  //vertex color for shader (should be in shader class)
     var positionSlot = GLuint() //vertex position for shader (should be in shader class)
-    var worldMatrix = GLuint()  //scaling, rotation and translation for shader (should be in shader class)
-    var projectionUniform = GLuint() //projection matrix
-    
-    var vertices = [
-        Vertex(Position: ( 1, -1,  1), Color: (1, 0, 0, 1)),
-        Vertex(Position: ( 1,  1,  1), Color: (0, 1, 0, 1)),
-        Vertex(Position: (-1,  1,  1), Color: (0, 0, 1, 1)),
-        Vertex(Position: (-1, -1,  1), Color: (1, 0, 0, 1)),
-        Vertex(Position: ( 1, -1, -1), Color: (0, 1, 0, 1)),
-        Vertex(Position: ( 1,  1, -1), Color: (0, 0, 1, 1)),
-        Vertex(Position: (-1,  1, -1), Color: (1, 0, 0, 1)),
-        Vertex(Position: (-1, -1, -1), Color: (0, 1, 0, 1))
-    ]
-    
-    var indices : [GLubyte] = [
-        // Front
-        0, 1, 2,
-        2, 3, 0,
-        // Back
-        4, 6, 5,
-        4, 7, 6,
-        // Left
-        2, 7, 3,
-        7, 6, 2,
-        // Right
-        0, 4, 1,
-        4, 1, 5,
-        // Top
-        6, 2, 1,
-        1, 6, 5,
-        // Bottom
-        0, 3, 7,
-        0, 7, 4
-    ]
-    
-    
+    var worldMatrix = GLuint()  //connection to world matrix for shader (should be in shader class)
+    var projectionUniform = GLuint() //connection to projection matrix for shader (should be in shader class)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -90,16 +58,7 @@ class OpenGLView: UIView {
             NSLog("OpenGLView init():  compileShaders() failed")
             return
         }
-        //should be part of model class
-        if (self.setupVBOs() != 0) {
-            NSLog("OpenGLView init():  setupVBOs() failed")
-            return
-        }
-        
-        if (self.setupDisplayLink() != 0) {
-            NSLog("OpenGLView init():  setupDisplayLink() failed")
-        }
-        NSLog("setup done")
+        NSLog("OpenGLView setup done")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -189,6 +148,7 @@ class OpenGLView: UIView {
             return -1
         }
         
+        //stuff for setting shader parameters each time we want to use it
         glUseProgram(program)
         
         //connect variables with shader program
@@ -205,37 +165,43 @@ class OpenGLView: UIView {
         return 0
     }
     
-    @objc func render(displayLink: CADisplayLink) -> Int {
-        //called to begin drawing
+    func beginFrame() -> Int {
         glClearColor(0, 104.0/255.0, 55.0/255.0, 1.0)
         glClear(GLbitfield(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT))  //clear depth and color buffer
         glEnable(GLenum(GL_DEPTH_TEST))  //enable depth testing (maybe not call every frame??)
+        glViewport(0, 0, GLsizei(self.frame.size.width), GLsizei(self.frame.size.height))  //say where we want to draw on the screen
         
-        //calculate projection matrix
+        //calculate projection matrix for this frame
         let asp : Float = Float(self.frame.size.width) / Float(self.frame.size.height)
-        var proj = GLKMatrix4MakePerspective(1.39, asp, 1.0, 1000.0)  //fov is 1.39 rad == 70 deg
+        projectionMatrix = GLKMatrix4MakePerspective(1.39, asp, 1.0, 1000.0)  //fov is 1.39 rad == 70 deg
         
+        //calculate view matrix as well
+        
+        return 0
+    }
+    
+    func render(model: Model) -> Int {
+        
+        var proj = projectionMatrix  //needed to avoid multiple access error
         //stack overflow code to convert proj matrix to pointer
         //send projection matrix to shader
-        withUnsafePointer(to: &proj.m) {
+        withUnsafePointer(to: &projectionMatrix.m) {
             $0.withMemoryRebound(to: GLfloat.self, capacity: MemoryLayout.size(ofValue: proj.m)) {
                 glUniformMatrix4fv(GLint(projectionUniform), 1, 0, $0)
             }
         }
-        
-        //calculate world matrix (should be done in model class)
-        var world = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(Float(sin(CACurrentMediaTime())), 0, -7), GLKMatrix4MakeRotation(Float(3.14 * cos(CACurrentMediaTime())), 1, 1, 0))
-        
+        var world = model.worldMatrix  //needed to avoid multiple access error
         //send world matrix to shader
-        withUnsafePointer(to: &world.m) {
+        withUnsafePointer(to: &model.worldMatrix.m) {
             $0.withMemoryRebound(to: GLfloat.self, capacity: MemoryLayout.size(ofValue: world.m)) {
                 glUniformMatrix4fv(GLint(worldMatrix), 1, 0, $0)
             }
         }
         
-        glViewport(0, 0, GLsizei(self.frame.size.width), GLsizei(self.frame.size.height))
+        glBindBuffer(GLenum(GL_ARRAY_BUFFER), model.vertexBuffer)  //tells opengl to use this vertex buffer for rendering
+        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), model.indexBuffer)  //same but for index buffer
         
-        //setup drawing for an object
+        //setup shaders for drawing for an object
         let positionSlotFirstComponent = UnsafePointer<Int>(bitPattern:0)
         glEnableVertexAttribArray(positionSlot)
         glVertexAttribPointer(positionSlot, 3, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), positionSlotFirstComponent)
@@ -243,16 +209,22 @@ class OpenGLView: UIView {
         glEnableVertexAttribArray(colorSlot)
         let colorSlotFirstComponent = UnsafePointer<Int>(bitPattern:MemoryLayout<Float>.size * 3)
         glVertexAttribPointer(colorSlot, 4, GLenum(GL_FLOAT), GLboolean(GL_FALSE), GLsizei(MemoryLayout<Vertex>.size), colorSlotFirstComponent)
-
+        
+        
+        
         let vertexBufferOffset = UnsafeMutableRawPointer(bitPattern: 0)
-        glDrawElements(GLenum(GL_TRIANGLES), GLsizei((indices.count * MemoryLayout<GLubyte>.size)/MemoryLayout<GLubyte>.size),
+        glDrawElements(GLenum(GL_TRIANGLES), GLsizei((model.indices.count * MemoryLayout<GLubyte>.size)/MemoryLayout<GLubyte>.size),
                        GLenum(GL_UNSIGNED_BYTE), vertexBufferOffset)
         
-        //called to finish rendering
+        return 0
+    }
+ 
+    
+    func endFrame() -> Int {
         context!.presentRenderbuffer(Int(GL_RENDERBUFFER))
         return 0
     }
-    
+
     func setupContext() -> Int {
         let api : EAGLRenderingAPI = EAGLRenderingAPI.openGLES3
         context = EAGLContext(api: api)
@@ -265,13 +237,6 @@ class OpenGLView: UIView {
             NSLog("Failed to set current OpenGL context")
             return -1
         }
-        return 0
-    }
-    
-    
-    func setupDisplayLink() -> Int {
-        let displayLink : CADisplayLink = CADisplayLink(target: self, selector: #selector(OpenGLView.render(displayLink:)))
-        displayLink.add(to: RunLoop.current, forMode: RunLoopMode(rawValue: RunLoopMode.defaultRunLoopMode.rawValue))
         return 0
     }
     
@@ -317,20 +282,6 @@ class OpenGLView: UIView {
         glGenRenderbuffers(1, &depthRenderBuffer);
         glBindRenderbuffer(GLenum(GL_RENDERBUFFER), depthRenderBuffer);
         glRenderbufferStorage(GLenum(GL_RENDERBUFFER), GLenum(GL_DEPTH_COMPONENT16), GLsizei(self.frame.size.width), GLsizei(self.frame.size.height))
-        return 0
-    }
-    
-    //should be part of model class
-    func setupVBOs() -> Int {
-        var vertexBuffer = GLuint()
-        glGenBuffers(1, &vertexBuffer)
-        glBindBuffer(GLenum(GL_ARRAY_BUFFER), vertexBuffer)
-        glBufferData(GLenum(GL_ARRAY_BUFFER), (vertices.count * MemoryLayout<Vertex>.size), vertices, GLenum(GL_STATIC_DRAW))
-        
-        var indexBuffer = GLuint()
-        glGenBuffers(1, &indexBuffer)
-        glBindBuffer(GLenum(GL_ELEMENT_ARRAY_BUFFER), indexBuffer)
-        glBufferData(GLenum(GL_ELEMENT_ARRAY_BUFFER), (indices.count * MemoryLayout<GLubyte>.size), indices, GLenum(GL_STATIC_DRAW))
         return 0
     }
 }
