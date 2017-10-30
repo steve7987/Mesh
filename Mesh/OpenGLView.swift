@@ -27,6 +27,7 @@ class OpenGLView: UIView {
     var projectionMatrix = GLKMatrix4()  //projection matrix for going from world to screen
  
     var colorShader: ColorShader!  //object containing the color shader info
+    var shaderTest: ColorShader!  //for testing
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -52,7 +53,8 @@ class OpenGLView: UIView {
             return
         }
         //create shaders
-        colorShader = ColorShader.init()
+        colorShader = ColorShader.init(vs: "VS", fs: "FS")
+        shaderTest = ColorShader.init(vs: "VSTest", fs: "FS")
         NSLog("OpenGLView setup done")
     }
     
@@ -81,9 +83,13 @@ class OpenGLView: UIView {
         return 0
     }
     
-    func render(model: Model) -> Int {
-        colorShader.setShaderParameters(model: model, projectionMatrix: projectionMatrix)
-        
+    func render(model: Model, camera: Camera, shaderType: Int) -> Int {
+        if (shaderType == 1) {
+            shaderTest.setShaderParameters(model: model, projectionMatrix: projectionMatrix, viewMatrix: camera.viewMatrix)
+        }
+        else {
+            colorShader.setShaderParameters(model: model, projectionMatrix: projectionMatrix, viewMatrix: camera.viewMatrix)
+        }
         let vertexBufferOffset = UnsafeMutableRawPointer(bitPattern: 0)
         glDrawElements(GLenum(GL_TRIANGLES), GLsizei((model.indices.count * MemoryLayout<GLubyte>.size)/MemoryLayout<GLubyte>.size),
                        GLenum(GL_UNSIGNED_BYTE), vertexBufferOffset)

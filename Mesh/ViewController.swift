@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     var glView: OpenGLView!
+    var camera: Camera!
+    
     var testModel: Model!
     var tm2 : Model!
     
@@ -20,6 +22,9 @@ class ViewController: UIViewController {
         let frame = UIScreen.main.bounds
         glView = OpenGLView(frame: frame)
         self.view.addSubview(glView)
+        
+        //create camera
+        camera = Camera(x: 0, y: 0, z: 0, xl: 0, yl: 0, zl: -5)
         
         //setup game loop
         let displayLink : CADisplayLink = CADisplayLink(target: self, selector: #selector(ViewController.render(displayLink:)))
@@ -37,13 +42,16 @@ class ViewController: UIViewController {
     }
 
     @objc func render(displayLink: CADisplayLink) -> Int {
+        camera.setLook(xl: Float(sin(CACurrentMediaTime())), yl: 0, zl: -5)
+        
+        
         if (glView.beginFrame() != 0) {
             NSLog("ViewController: render(): glView.beginFrame failed")
             return -1
         }
         //call render functions for each object here
-        glView.render(model: testModel)
-        glView.render(model: tm2)
+        glView.render(model: testModel, camera: camera, shaderType: 0)
+        glView.render(model: tm2, camera: camera, shaderType: 1)
         
         if (glView.endFrame() != 0) {
             NSLog("ViewController: render(): glView.endFrame failed")

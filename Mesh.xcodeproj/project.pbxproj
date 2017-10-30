@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA504D4D1FA7AFD60027F8D9 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA504D4C1FA7AFD60027F8D9 /* Camera.swift */; };
 		DA6325891FA55C8E005EA9EC /* VS.glsl in Resources */ = {isa = PBXBuildFile; fileRef = DA6325881FA55C8E005EA9EC /* VS.glsl */; };
 		DA63258B1FA55CC5005EA9EC /* FS.glsl in Resources */ = {isa = PBXBuildFile; fileRef = DA63258A1FA55CC5005EA9EC /* FS.glsl */; };
 		DA7EC7E61FA4112F00B0CA2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC7E51FA4112F00B0CA2E /* AppDelegate.swift */; };
@@ -19,6 +20,7 @@
 		DA7EC8141FA411E800B0CA2E /* OpenGLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */; };
 		DA90647F1FA65D350078D330 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90647E1FA65D350078D330 /* Model.swift */; };
 		DA9064811FA6AEFA0078D330 /* ColorShader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9064801FA6AEFA0078D330 /* ColorShader.swift */; };
+		DA9064831FA6B5850078D330 /* VSTest.glsl in Resources */ = {isa = PBXBuildFile; fileRef = DA9064821FA6B5850078D330 /* VSTest.glsl */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DA504D4C1FA7AFD60027F8D9 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		DA6325881FA55C8E005EA9EC /* VS.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = VS.glsl; sourceTree = "<group>"; };
 		DA63258A1FA55CC5005EA9EC /* FS.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = FS.glsl; sourceTree = "<group>"; };
 		DA7EC7E21FA4112F00B0CA2E /* Mesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +60,7 @@
 		DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLView.swift; sourceTree = "<group>"; };
 		DA90647E1FA65D350078D330 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		DA9064801FA6AEFA0078D330 /* ColorShader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShader.swift; sourceTree = "<group>"; };
+		DA9064821FA6B5850078D330 /* VSTest.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = VSTest.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				DA6325881FA55C8E005EA9EC /* VS.glsl */,
+				DA9064821FA6B5850078D330 /* VSTest.glsl */,
 				DA63258A1FA55CC5005EA9EC /* FS.glsl */,
 			);
 			path = Shaders;
@@ -117,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				DA7EC7E51FA4112F00B0CA2E /* AppDelegate.swift */,
+				DA504D4C1FA7AFD60027F8D9 /* Camera.swift */,
 				DA7EC7E71FA4112F00B0CA2E /* ViewController.swift */,
 				DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */,
 				DA9064801FA6AEFA0078D330 /* ColorShader.swift */,
@@ -255,6 +261,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA9064831FA6B5850078D330 /* VSTest.glsl in Resources */,
 				DA6325891FA55C8E005EA9EC /* VS.glsl in Resources */,
 				DA7EC7F01FA4112F00B0CA2E /* LaunchScreen.storyboard in Resources */,
 				DA7EC7ED1FA4112F00B0CA2E /* Assets.xcassets in Resources */,
@@ -286,6 +293,7 @@
 			files = (
 				DA7EC7E81FA4112F00B0CA2E /* ViewController.swift in Sources */,
 				DA7EC8141FA411E800B0CA2E /* OpenGLView.swift in Sources */,
+				DA504D4D1FA7AFD60027F8D9 /* Camera.swift in Sources */,
 				DA7EC7E61FA4112F00B0CA2E /* AppDelegate.swift in Sources */,
 				DA90647F1FA65D350078D330 /* Model.swift in Sources */,
 				DA9064811FA6AEFA0078D330 /* ColorShader.swift in Sources */,
