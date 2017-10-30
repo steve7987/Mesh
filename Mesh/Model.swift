@@ -54,6 +54,7 @@ class Model: NSObject {
         //create virtual buffer objects
         if (setupVBOs() != 0){
             NSLog("Model: init() setupVBOs failed")
+            return
         }
     }
     

@@ -28,7 +28,7 @@ class ViewController: UIViewController {
         
         //test stuff
         testModel = Model(x: 1, y: 0, z: -12)
-        tm2 = Model(x: -1, y: 0, z: -8)
+        tm2 = Model(x: -2, y: -3, z: -8)
     }
 
     override func didReceiveMemoryWarning() {

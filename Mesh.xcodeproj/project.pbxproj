@@ -18,6 +18,7 @@
 		DA7EC8061FA4112F00B0CA2E /* MeshUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC8051FA4112F00B0CA2E /* MeshUITests.swift */; };
 		DA7EC8141FA411E800B0CA2E /* OpenGLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */; };
 		DA90647F1FA65D350078D330 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90647E1FA65D350078D330 /* Model.swift */; };
+		DA9064811FA6AEFA0078D330 /* ColorShader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA9064801FA6AEFA0078D330 /* ColorShader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		DA7EC8071FA4112F00B0CA2E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenGLView.swift; sourceTree = "<group>"; };
 		DA90647E1FA65D350078D330 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		DA9064801FA6AEFA0078D330 /* ColorShader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorShader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				DA7EC7E51FA4112F00B0CA2E /* AppDelegate.swift */,
 				DA7EC7E71FA4112F00B0CA2E /* ViewController.swift */,
 				DA7EC8131FA411E800B0CA2E /* OpenGLView.swift */,
+				DA9064801FA6AEFA0078D330 /* ColorShader.swift */,
 				DA90647E1FA65D350078D330 /* Model.swift */,
 				DA7EC7E91FA4112F00B0CA2E /* Main.storyboard */,
 				DA7EC7EC1FA4112F00B0CA2E /* Assets.xcassets */,
@@ -285,6 +288,7 @@
 				DA7EC8141FA411E800B0CA2E /* OpenGLView.swift in Sources */,
 				DA7EC7E61FA4112F00B0CA2E /* AppDelegate.swift in Sources */,
 				DA90647F1FA65D350078D330 /* Model.swift in Sources */,
+				DA9064811FA6AEFA0078D330 /* ColorShader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
